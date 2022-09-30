@@ -85,21 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // to download image when longPress on ImageView
-        imageView.setOnLongClickListener {
-            requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            return@setOnLongClickListener true
-        }
 
     }
 
     //request camera permission
-    private val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){granted->
-        if (granted){
-            takePicturePreview.launch(null)
-        }else {
-            Toast.makeText(this, "Permission Denied !! Try again", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     //launch camera and take picture
     private val takePicturePreview = registerForActivityResult(ActivityResultContracts.TakePicturePreview()){bitmap->
@@ -110,10 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //to get image from gallery
-    private val onresult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result->
-        Log.i("TAG", "This is the result: ${result.data} ${result.resultCode}")
-        onResultReceived(GALLERY_REQUEST_CODE,result)
-    }
+
 
     private fun  onResultReceived(requestCode: Int, result: ActivityResult?){
         when(requestCode){
@@ -177,27 +163,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //fun that takes a bitmap and store to user's device
-//    private fun downloadImage(mBitmap: Bitmap):Uri? {
-//        val contentValues = ContentValues().apply {
-//            put(MediaStore.Images.Media.DISPLAY_NAME,"Birds_Images"+ System.currentTimeMillis()/1000)
-//            put(MediaStore.Images.Media.MIME_TYPE,"image/png")
-//        }
-//        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-//        if (uri != null){
-//            contentResolver.insert(uri, contentValues)?.also {
-//                contentResolver.openOutputStream(it).use { outputStream ->
-//                    if (!mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)){
-//                        throw IOException("Couldn't save the bitmap")
-//                    }
-//                    else{
-//                        Toast.makeText(applicationContext, "Image Saved", Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//                return it
-//            }
-//        }
-//        return null
-//    }
+
 }
 
 
