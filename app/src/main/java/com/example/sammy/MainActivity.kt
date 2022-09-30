@@ -173,6 +173,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     //fun that takes a bitmap and store to user's device
+    private fun downloadImage(mBitmap: Bitmap):Uri? {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME,"Birds_Images"+ System.currentTimeMillis()/1000)
+            put(MediaStore.Images.Media.MIME_TYPE,"image/png")
+        }
+        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        if (uri != null){
+            contentResolver.insert(uri, contentValues)?.also {
+                contentResolver.openOutputStream(it).use { outputStream ->
+                    if (!mBitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)){
+                        throw IOException("Couldn't save the bitmap")
+                    }
+                    else{
+                        Toast.makeText(applicationContext, "Image Saved", Toast.LENGTH_LONG).show()
+                    }
+                }
+                return it
+            }
+        }
+        return null
+    }
 
 }
 
