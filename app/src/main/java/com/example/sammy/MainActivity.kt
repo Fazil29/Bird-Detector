@@ -85,7 +85,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // to download image when longPress on ImageView
-a
+        imageView.setOnLongClickListener {
+            requestPermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            return@setOnLongClickListener true
+        }
     }
 
     //request camera permission
