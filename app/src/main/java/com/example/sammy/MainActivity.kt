@@ -89,6 +89,13 @@ a
     }
 
     //request camera permission
+    private val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()){granted->
+        if (granted){
+            takePicturePreview.launch(null)
+        }else {
+            Toast.makeText(this, "Permission Denied !! Try again", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     //launch camera and take picture
     private val takePicturePreview = registerForActivityResult(ActivityResultContracts.TakePicturePreview()){bitmap->
