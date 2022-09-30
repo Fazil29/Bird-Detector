@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // to download image when longPress on ImageView
-
+a
     }
 
     //request camera permission
