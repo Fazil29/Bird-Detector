@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var imageView: ImageView
-
+    private lateinit var button: Button
     private lateinit var tvOutput: TextView
     private val GALLERY_REQUEST_CODE = 123
 
